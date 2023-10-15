@@ -2,6 +2,8 @@
 
 namespace App\Console\Commands;
 
+use App\Stock\Repositories\CompanyRepository;
+use App\Stock\Services\ImportService;
 use Illuminate\Console\Command;
 
 class importPrice extends Command
@@ -30,21 +32,21 @@ class importPrice extends Command
     public function handle()
     {
         //
-        $stock = $this->argument('stock');
+        $symbol = $this->argument('symbol');
         $type = $this->option('type');
         $top = $this->option('top');
 
-        if ($stock == '') {
+        $service = new ImportService(
+            $this->app
+        );
+        if ($symbol == '') {
             // Import all
             $this->info('Importing price for top ' . $top . ' stocks');
-            $stocks = companyRepository->getTopStocks($top);
-            foreach ($stocks as $stock) {
-                $this->info('Import stock: '. $stock->Symbol);
-                ImportService::import($stock->Symbol, $type);
-            }
+            $service->importPrices($top, $type);
         } else {
             // Validate stock
-            
+            $this->info('Importing price for top ' . $top . ' stocks');
+            $service->importPrice($symbol, $type);
         }
     }
 }
