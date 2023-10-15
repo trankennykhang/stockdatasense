@@ -9,7 +9,7 @@ use App\Stock\Domain\Repositories\PriceRepository;
 
 class ImportService {
 
-    public StockProvider $provider = null;
+    public StockProvider $provider;
     public DatabaseConnector $conn;
 
     public function __construct(DatabaseConnector $conn, StockProvider $provider) {

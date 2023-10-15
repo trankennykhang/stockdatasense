@@ -61,8 +61,8 @@ abstract class BaseEntity extends BaseModel {
         
         return $rs;
     }
-    public function newInstance(array $arr) {
-        //return new ReflectionClass(get_class($this))($arr);
-        return new Company();
+    public function newEntity(array $arr) {
+        $class = new ReflectionClass(get_class($this));
+        return $class->newInstanceArgs([$arr]);
     }
 }

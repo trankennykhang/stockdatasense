@@ -14,6 +14,7 @@ abstract class BaseMapper {
         return $rs;
     }
     public static function toEntity(array $arr, BaseEntity $entity) {
-        return $entity->newInstance($arr);
+
+        return $entity->newEntity($arr);
     }
 }

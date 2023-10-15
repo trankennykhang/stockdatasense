@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\DB;
 
 class MysqlConnector implements DatabaseConnector {
 
-    public MysqlQueryBuilder $builder = null;
+    public MysqlQueryBuilder $builder;
 
     public function query(string $queryString) {
         return MysqlMapper::toArray(DB::select($queryString));

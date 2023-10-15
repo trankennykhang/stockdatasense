@@ -7,12 +7,12 @@ use App\Stock\Domain\Mapper\PriceMapper;
 use DateTime;
 
 class PriceRepository {
-    public DatabaseConnector $conn = null;
+    public DatabaseConnector $conn;
 
     public function __construct(DatabaseConnector $conn) {
         $this->conn = $conn;
     }
-    function getPrices(string $symbol, DateTime $start, DateTime $end = '') : array {
+    function getPrices(string $symbol, DateTime $start, DateTime $end) : array {
         return PriceMapper::toPriceList(
             $this->conn->query(
                 $this->conn->getQueryBuilder()->toQuery(
